@@ -14,7 +14,6 @@ const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
     isLoading: false,
-    isAdmin: null,
     user: null,
     isProfileOpen: null
 };
@@ -33,8 +32,7 @@ export const Auth = (state = initialState, action) => {
                 isAuthenticated: true,
                 isLoading: false,
                 user: action.payload,
-                isProfileOpen: false,
-                isAdmin: action.payload.role
+                isProfileOpen: false
             };
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
@@ -44,8 +42,7 @@ export const Auth = (state = initialState, action) => {
                 ...action.payload,
                 isAuthenticated: true,
                 isLoading: false,
-                isProfileOpen: false,
-                isAdmin: action.payload.user.role
+                isProfileOpen: false
             };
         case AUTH_ERROR:
         case LOGIN_FAIL:

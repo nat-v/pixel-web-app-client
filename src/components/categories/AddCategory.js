@@ -45,19 +45,6 @@ class AddCategory extends Component {
         });
     };
 
-    showAlert = () => {
-        confirmAlert({
-            title: 'Додавання нової категорії',
-            message: 'Категорію було успішно додано до списку.',
-            buttons: [
-                {
-                    label: 'Ok',
-                    onClick: () => { this.props.history.push('/admin/category/view'); }
-                }
-            ]
-        });
-    };
-
     onSubmit = e => {
         e.preventDefault();
 

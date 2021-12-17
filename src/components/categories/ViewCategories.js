@@ -29,25 +29,6 @@ class ViewCategories extends Component {
         this.props.loadCategories();
     };
 
-    delete = (id) => {
-        confirmAlert({
-            title: 'Видалення категорії',
-            message: 'Ви впевнені, що хочете видалити цю категорію? Усі дописи, які відносяться до цієї категорії, будуть перенесі у категорію "Інше".',
-            buttons: [
-                {
-                    label: 'Так',
-                    onClick: () => {
-                        this.props.deleteCategory(id);
-                        this.props.history.push('/admin/category/view');
-                    }
-                },
-                {
-                    label: 'Ні'
-                }
-            ]
-        });
-    };
-
     render() {
         const { categories } = this.props.category;
         return (

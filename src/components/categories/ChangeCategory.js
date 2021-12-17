@@ -66,19 +66,6 @@ class ChangeCategory extends Component {
         });
     };
 
-    showAlert = () => {
-        confirmAlert({
-            title: 'Оновлення даних',
-            message: 'Зміни було успішно збережено.',
-            buttons: [
-                {
-                    label: 'Ok',
-                    onClick: () => { this.props.history.push('/admin/category/view'); }
-                }
-            ]
-        });
-    };
-
     onSubmit = e => {
         e.preventDefault();
 

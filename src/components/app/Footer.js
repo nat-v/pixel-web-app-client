@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 class Footer extends Component {
     render() {
 
-        const { isAuthenticated, isAdmin, user } = this.props.auth;
+        const { isAuthenticated, user } = this.props.auth;
 
         return (
             <div className="footer">

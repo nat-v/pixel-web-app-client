@@ -19,18 +19,12 @@ import PostDetails from '../posts/PostDetails';
 import UpdateProfile from '../profile/UpdateProfile';
 import UpdatePassword from '../profile/UpdatePassword';
 import ViewProfile from '../profile/ViewProfile';
-import AdminDashboard from '../admin/AdminDashboard';
-import ViewCategories from '../categories/ViewCategories';
 import PostsInCategory from '../posts/PostsInCategory';
-import AddCategory from '../categories/AddCategory';
 import ChangeImage from '../gallery/ChangeImage';
 import ChangePost from '../posts/ChangePost';
 import UsersList from '../users/UsersList';
 import Publications from '../publications/Publications';
 import SavedPosts from '../posts/SavedPosts';
-import ChangeCategory from '../categories/ChangeCategory';
-import ViewPublications from '../publications/ViewPublications';
-import ViewComments from '../comments/ViewComments';
 
 import { logout } from '../../redux/actions/authActions';
 
@@ -51,7 +45,7 @@ class Main extends Component {
     }
 
     render() {
-        const { isAuthenticated, isAdmin } = this.props.auth;
+        const { isAuthenticated } = this.props.auth;
 
         const ChangeProfile = () => {
             return (
@@ -63,43 +57,7 @@ class Main extends Component {
             return (
                 <ProfileSettings profileSettings={<UpdatePassword user={this.props.auth.user} />} />
             );
-        };
-
-        const LoadCategories = () => {
-            return (
-                <AdminDashboard adminPanel={<ViewCategories />} />
-            );
-        };
-
-        const LoadPublications = () => {
-            return (
-                <AdminDashboard adminPanel={<ViewPublications />} />
-            );
-        };
-
-        const LoadComments = () => {
-            return (
-                <AdminDashboard adminPanel={<ViewComments />} />
-            );
-        };
-
-        const ViewPostsInCategory = () => {
-            return (
-                <AdminDashboard adminPanel={<PostsInCategory />} />
-            );
-        };
-
-        const CreateCategory = () => {
-            return (
-                <AdminDashboard adminPanel={<AddCategory />} />
-            );
-        };
-
-        const UpdateCategory = () => {
-            return (
-                <AdminDashboard adminPanel={<ChangeCategory />} />
-            );
-        };
+        };        
 
         /*const UserProfile = ({ match }) => {
             return (
@@ -121,19 +79,7 @@ class Main extends Component {
                     <Route exact path='/login' component={LoginModal} />
                     <Route exact path='/register' component={RegisterModal} />
                     <Route exact path='/editor' component={Editor} />
-                    {isAdmin ?
-                        <Fragment>
-                            <Route exact path='/logout' component={Logout} />
-                            <Route exact path='/admin' component={AdminDashboard} />
-                            <Route exact path='/admin/category/view' component={LoadCategories} />
-                            <Route exact path='/admin/publication/view' component={LoadPublications} />
-                            <Route exact path='/admin/comment/view' component={LoadComments} />
-                            <Route exact path='/admin/category/create' component={CreateCategory} />
-                            <Route excat path='/admin/category/posts/:categoryId' component={PostsInCategory} />
-                            <Route exact path='/admin/category/update/:categoryId' component={UpdateCategory} />
-                            <Route exact path='/admin/publication/update/:postId' component={LoadCategories} />
-                        </Fragment>
-                        : isAuthenticated && !isAdmin ?
+                    {isAuthenticated ?
                             <Fragment>
                                 <Route exact path='/logout' component={Logout} />
                                 <Route exact path='/users' component={UsersList} />
@@ -148,15 +94,15 @@ class Main extends Component {
                                 <Route exact path='/posts/create/:imageId' component={CreatePost} />
                                 <Route exact path='/posts/update/:postId' component={ChangePost} />
                                 <Route exact path='/posts/view/:postId' component={PostDetails} />
-                                <Route exact path='/posts/category/:categoryId' component={ViewPostsInCategory} />
+                                <Route exact path='/posts/category/:categoryId' component={PostsInCategory} />
                                 <Route exact path='/saved' component={SavedPosts} />
                             </Fragment>
-                            : <Redirect to='/home' />}
+                            : <Redirect to='/home' />
                     }
                     <Route path='*' component={() => '404 NOT FOUND'} />
                 </Switch>
                 {
-                    !this.props.editor.isEditorOpen && !this.props.auth.isAdmin ?
+                    !this.props.editor.isEditorOpen ?
                         <Footer /> : null
                 }
             </div >

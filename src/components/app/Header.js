@@ -56,7 +56,7 @@ class Header extends Component {
     };
 
     render() {
-        const { isAuthenticated, isAdmin, user } = this.props.auth;
+        const { isAuthenticated, user } = this.props.auth;
 
         const authLinks = (
             <Fragment>
@@ -128,33 +128,13 @@ class Header extends Component {
             </Fragment>
         );
 
-        const adminLinks = (
-            <Fragment>
-                <NavItem>
-                    <NavLink className='nav-link' to='/admin'>Панель керування</NavLink>
-                </NavItem>
-                <NavItem>
-                    <Logout />
-                </NavItem>
-            </Fragment>
-        );
-
         return (
             <div>
-                <Navbar color='dark' dark expand='md'>
-                    {isAdmin ?
-                        <NavbarBrand href='/admin'>
-                            <img className='mr-3' width='60' height='60' src='/favicon.png' alt='Logo' />Pixel Art World
-                        </NavbarBrand>
-                        :
-                        <NavbarBrand href='/home'>
-                            <img className='mr-3' width='60' height='60' src='/favicon.png' alt='Logo' />Pixel Art World
-                        </NavbarBrand>
-                    }
+                <Navbar color='dark' dark expand='md'>                   
                     <NavbarToggler onClick={this.toggleNavBar} />
                     <Collapse isOpen={this.state.isNavOpen} navbar>
                         <Nav className='ml-auto' navbar>
-                            {isAdmin ? adminLinks : isAuthenticated && !isAdmin ? authLinks : guestLinks}
+                            {isAuthenticated ? authLinks : guestLinks}
                         </Nav>
                     </Collapse>
                 </Navbar>
